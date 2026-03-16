@@ -1008,14 +1008,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
+        <script>
+        localStorage.clear();   // add this line
         // Initialize localStorage data structure
         if (!localStorage.getItem('students')) {
             localStorage.setItem('students', JSON.stringify([]));
         }
         if (!localStorage.getItem('teachers')) {
-            localStorage.setItem('teachers', JSON.stringify([
-                { id: 'T001', name: 'Bharat Swami', password: 'admin123' }
-            ]));
+           localStorage.setItem('teachers', JSON.stringify([
+           { id: 'teacher1', name: 'Bharat Swami', password: '1234' }
+         ]));
         }
 
         // Current user session
@@ -1048,8 +1050,8 @@
         // Login handlers
         function handleTeacherLogin(event) {
             event.preventDefault();
-            const teacherId = document.getElementById('teacherId').value;
-            const password = document.getElementById('teacherPassword').value;
+            const teacherId = document.getElementById('teacherId').value.trim();
+            const password = document.getElementById('teacherPassword').value.trim();
             
             const teachers = JSON.parse(localStorage.getItem('teachers'));
             const teacher = teachers.find(t => t.id === teacherId && t.password === password);
